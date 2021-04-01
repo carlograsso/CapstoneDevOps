@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: capstonedevops-deployment
+  name: capstonedevops
   labels:
     app: FlaskHello
 spec:
@@ -15,7 +15,7 @@ spec:
         app: FlaskHelo
     spec:
       containers:
-        - name: carlograss92/capstone-project
-          image: nginx:1.14.2
+        - name: capstonedevops
+          image: carlograss92/capstone-project
           ports:
             - containerPort: 80
