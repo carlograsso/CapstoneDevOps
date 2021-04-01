@@ -50,7 +50,7 @@ jobs:
             docker login -u ${DOCKER_USR} -p ${DOCKER_PASS}
             docker push carlograss92/capstone-project:latest
 
-  deploy-cluster:
+  create-deployment:
     executor: aws-eks/python3
     parameters:
       cluster-name:
