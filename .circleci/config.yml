@@ -75,15 +75,15 @@ workflows:
           requires:
             - lint
       - aws-eks/create-cluster:
-          cluster-name: capstonedevops-cluster
+          cluster-name: capstonedevops-latest
           requires:
             - docker-build-push
       - create-deployment:
-          cluster-name: capstonedevops-cluster
+          cluster-latest
           requires:
             - aws-eks/create-cluster
       - aws-eks/update-container-image:
-          cluster-name: capstonedevops-cluster
+          cluster-latest
           container-image-updates: "capstonedevops=carlograss92/capstone-project"
           post-steps:
             - kubernetes/delete-resource:
@@ -95,7 +95,7 @@ workflows:
             - create-deployment
           resource-name: deployment/capstonedevops
       - aws-eks/delete-cluster:
-          cluster-name: capstonedevops-cluster
+          cluster-latest
           requires:
             - aws-eks/update-container-image
 # workflows:
