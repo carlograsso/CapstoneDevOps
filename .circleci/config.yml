@@ -51,8 +51,7 @@ jobs:
             docker push carlograss92/capstone-project:latest
 
   deploy-cluster:
-    docker:
-      - image: aws-eks/python3
+    executor: aws-eks/python3
     steps:
       - checkout
       - kubernetes/install
