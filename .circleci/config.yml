@@ -72,10 +72,10 @@ workflows:
     jobs:
       # - aws-eks/create-cluster:
       #     cluster-name: capstonedevops-b2bbd77
-      # - create-deployment:
-      #     cluster-name: capstonedevops-b2bbd77
-      #     requires:
-      #       - aws-eks/create-cluster
+      - create-deployment:
+          cluster-name: capstonedevops-b2bbd77
+          requires:
+            - aws-eks/create-cluster
       - aws-eks/update-container-image:
           cluster-name: capstonedevops-b2bbd77
           container-image-updates: carlograss92/capstone-project
@@ -85,8 +85,8 @@ workflows:
                 resource-types: deployment
                 wait: true
           record: true
-          # requires:
-          #   - create-deployment
+          requires:
+            - create-deployment
           resource-name: deployment/capstonedevops
       - aws-eks/delete-cluster:
           cluster-name: capstonedevops-b2bbd77
