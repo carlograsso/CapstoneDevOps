@@ -30,7 +30,21 @@ jobs:
             - ./venv
           key: dependencies-{{ checksum "requirements.txt" }}
 
+  docker-build-push:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Build and push docker image.
+          command: |
+            docker build --tag=capstoneProject .
+            docker login -u ${DOCKER_USERNAME} -p {DOCKER_PASSWORD}
+            docker tag capstoneProject carlograss92/capstoneProject:latest
+            docker push carlograss92/capstoneProject:latest
 workflows:
   default:
     jobs:
       - lint
+      - docker-build-push:
+          requires:
+            - lint
