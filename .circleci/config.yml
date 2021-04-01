@@ -35,16 +35,29 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build and push docker image.
+          name: Build and tang docker image.
           command: |
             docker build --tag=capstone-project .
-            docker login -u ${DOCKER_USR} -p ${DOCKER_PASS}
             docker tag capstone-project carlograss92/capstone-project:latest
+
+      - run:
+          name: Push docker image.
+          command: |
+            docker login -u ${DOCKER_USR} -p ${DOCKER_PASS}
             docker push carlograss92/capstone-project:latest
+
+  deploy-cluster:
+    docker:
+      - image: aws-eks/python3
+    steps:
+      - checkout
+      - kubernetes/install
+
 workflows:
   default:
     jobs:
-      - lint
-      - docker-build-push:
-          requires:
-            - lint
+      # - lint
+      # - docker-build-push:
+      #     requires:
+      #       - lint
+      - deploy-cluster
