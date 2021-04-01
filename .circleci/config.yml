@@ -1,0 +1,31 @@
+version: 2.1
+
+jobs:
+  lint:
+    docker:
+      - image: python:3.7.3-stretch
+    steps:
+      - checkout:
+      - restore_cache:
+          keys:
+            - dependencies - {{ checksum "requirements.txt"  }}
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+
+            make install
+
+            wget -O /bin/hadolint https://github.com/hadolint/hadolint/releases/download/v1.16.3/hadolint-Linux-x86_64 &&\
+            chmod +x /bin/hadolint
+      - run:
+          name: lint
+          command: |
+            . venv/bin/activate
+            make lint
+
+      - save_cache:
+          paths:
+            - ./venv
+          ket: dependencies-{{ checksum "requirements.txt" }}
