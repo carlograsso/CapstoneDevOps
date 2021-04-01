@@ -1,5 +1,9 @@
 version: 2.1
 
+orbs:
+  kubernetes: circleci/kubernetes
+  aws-eks: circleci/aws-eks
+
 jobs:
   lint:
     docker:
