@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capstonedevops-deployment
+  labels:
+    app: FlaskHello
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: FlaskHello
+  template:
+    metadata:
+      labels:
+        app: FlaskHelo
+    spec:
+      containers:
+        - name: carlograss92/capstone-project
+          image: nginx:1.14.2
+          ports:
+            - containerPort: 80
