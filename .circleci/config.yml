@@ -29,3 +29,8 @@ jobs:
           paths:
             - ./venv
           ket: dependencies-{{ checksum "requirements.txt" }}
+
+workflows:
+  default:
+    jobs:
+      - lint
