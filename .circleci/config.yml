@@ -70,10 +70,10 @@ jobs:
 workflows:
   deployment:
     jobs:
-    - lint
-    - docker-build-push:
-        requires:
-          - lint
+      - lint
+      - docker-build-push:
+          requires:
+            - lint
       - aws-eks/create-cluster:
           cluster-name: capstonedevops-cluster
           requires:
