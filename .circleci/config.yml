@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Build and push docker image.
           command: |
-            docker build --tag=capstoneProject .
+            docker build --tag=capstone-project .
             docker login -u ${DOCKER_USERNAME} -p {DOCKER_PASSWORD}
             docker tag capstoneProject carlograss92/capstoneProject:latest
             docker push carlograss92/capstoneProject:latest
