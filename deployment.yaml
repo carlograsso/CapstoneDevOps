@@ -13,11 +13,13 @@ spec:
     metadata:
       labels:
         app: FlaskHello
-  strategy:
-    type: RollingUpdate
     spec:
       containers:
         - name: capstonedevops
           image: carlograss92/capstone-project
           ports:
             - containerPort: 80
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
