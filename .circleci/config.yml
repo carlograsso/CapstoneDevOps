@@ -68,11 +68,36 @@ jobs:
           resource-name: deployment/capstonedevops
 
 workflows:
-  default:
+  deployment:
     jobs:
-      # - lint
-      # - docker-build-push:
-      #     requires:
-      #       - lint
-      - deploy-cluster:
+      - aws-eks/create-cluster:
           cluster-name: capstonedevops-${CIRCLE_WORKFLOW_ID:0:7}
+      - create-deployment:
+          cluster-name: capstonedevops-${CIRCLE_WORKFLOW_ID:0:7}
+          requires:
+            - aws-eks/create-cluster
+      - aws-eks/update-container-image:
+          cluster-name: capstonedevops-${CIRCLE_WORKFLOW_ID:0:7}
+          container-image-updates: carlograss92/capstone-project
+          post-steps:
+            - kubernetes/delete-resource:
+                resource-names: deployment/capstonedevops
+                resource-types: deployment
+                wait: true
+          record: true
+          requires:
+            - create-deployment
+          resource-name: deployment/capstonedevops
+      - aws-eks/delete-cluster:
+          cluster-name: capstonedevops-${CIRCLE_WORKFLOW_ID:0:7}
+          requires:
+            - aws-eks/update-container-image
+# workflows:
+#   default:
+#     jobs:
+#       # - lint
+#       # - docker-build-push:
+#       #     requires:
+#       #       - lint
+#       - deploy-cluster:
+#           cluster-name: capstonedevops-${CIRCLE_WORKFLOW_ID:0:7}
