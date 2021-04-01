@@ -75,4 +75,4 @@ workflows:
       #     requires:
       #       - lint
       - deploy-cluster:
-          cluster-name: capstonedevops-${CIRCLECI_WORKFLOW_ID:0:7}
+          cluster-name: capstonedevops-${CIRCLE_WORKFLOW_ID:0:7}
