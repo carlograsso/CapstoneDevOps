@@ -81,13 +81,13 @@ workflows:
           container-image-updates: "capstonedevops=carlograss92/capstone-project"
           post-steps:
             - kubernetes/delete-resource:
-                resource-names: deployment/capstonedevops
+                resource-names: capstonedevops
                 resource-types: deployment
                 wait: true
           record: true
           requires:
             - create-deployment
-          resource-name: deployment/capstonedevops
+          resource-name: capstonedevops
       - aws-eks/delete-cluster:
           cluster-name: capstonedevops-b2bbd77
           requires:
