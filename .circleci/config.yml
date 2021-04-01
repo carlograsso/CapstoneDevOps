@@ -70,8 +70,14 @@ jobs:
 workflows:
   deployment:
     jobs:
+    - lint
+    - docker-build-push:
+        requires:
+          - lint
       - aws-eks/create-cluster:
           cluster-name: capstonedevops-cluster
+          requires:
+            - docker-build-push
       - create-deployment:
           cluster-name: capstonedevops-cluster
           requires:
@@ -92,3 +98,12 @@ workflows:
           cluster-name: capstonedevops-cluster
           requires:
             - aws-eks/update-container-image
+# workflows:
+#   default:
+#     jobs:
+#       # - lint
+#       # - docker-build-push:
+#       #     requires:
+#       #       - lint
+#       - deploy-cluster:
+#           cluster-name: capstonedevops-${CIRCLE_WORKFLOW_ID:0:7}
