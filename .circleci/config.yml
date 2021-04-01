@@ -65,7 +65,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: deployment.yaml
-          resource-name: capstonedevops
+          resource-name: deployment/capstonedevops
 
 workflows:
   deployment:
@@ -87,7 +87,7 @@ workflows:
           record: true
           requires:
             - create-deployment
-          resource-name: capstonedevops
+          resource-name: deployment/capstonedevops
       - aws-eks/delete-cluster:
           cluster-name: capstonedevops-b2bbd77
           requires:
