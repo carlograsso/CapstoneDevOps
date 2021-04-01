@@ -5,7 +5,6 @@ WORKDIR /app
 
 ## Step 2:
 COPY . FlaskHello.py /app/
-COPY . model_data /app/
 
 ## Step 3:
 RUN pip install --upgrade pip==21.0.1 &&\
