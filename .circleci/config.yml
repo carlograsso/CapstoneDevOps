@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: python:3.7.3-stretch
     steps:
-      - checkout:
+      - checkout
       - restore_cache:
           keys:
             - dependencies - {{ checksum "requirements.txt"  }}
