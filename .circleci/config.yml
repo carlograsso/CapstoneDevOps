@@ -28,7 +28,7 @@ jobs:
       - save_cache:
           paths:
             - ./venv
-          ket: dependencies-{{ checksum "requirements.txt" }}
+          key: dependencies-{{ checksum "requirements.txt" }}
 
 workflows:
   default:
