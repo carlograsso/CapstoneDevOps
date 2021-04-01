@@ -78,7 +78,7 @@ workflows:
           #   - aws-eks/create-cluster
       - aws-eks/update-container-image:
           cluster-name: capstonedevops-b2bbd77
-          container-image-updates: carlograss92/capstone-project
+          container-image-updates: "capstone-project=carlograss92/capstone-project"
           post-steps:
             - kubernetes/delete-resource:
                 resource-names: deployment/capstonedevops
