@@ -15,9 +15,6 @@ spec:
         app: FlaskHello
   strategy:
     type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 2
-
     spec:
       containers:
         - name: capstonedevops
