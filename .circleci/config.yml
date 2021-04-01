@@ -70,14 +70,14 @@ jobs:
 workflows:
   deployment:
     jobs:
-      # - aws-eks/create-cluster:
-      #     cluster-name: capstonedevops-b2bbd77
+      - aws-eks/create-cluster:
+          cluster-name: capstonedevops-cluster
       - create-deployment:
-          cluster-name: capstonedevops-b2bbd77
-          # requires:
-          #   - aws-eks/create-cluster
+          cluster-name: capstonedevops-cluster
+          requires:
+            - aws-eks/create-cluster
       - aws-eks/update-container-image:
-          cluster-name: capstonedevops-b2bbd77
+          cluster-name: capstonedevops-cluster
           container-image-updates: "capstonedevops=carlograss92/capstone-project"
           post-steps:
             - kubernetes/delete-resource:
@@ -89,15 +89,6 @@ workflows:
             - create-deployment
           resource-name: deployment/capstonedevops
       - aws-eks/delete-cluster:
-          cluster-name: capstonedevops-b2bbd77
+          cluster-name: capstonedevops-cluster
           requires:
             - aws-eks/update-container-image
-# workflows:
-#   default:
-#     jobs:
-#       # - lint
-#       # - docker-build-push:
-#       #     requires:
-#       #       - lint
-#       - deploy-cluster:
-#           cluster-name: capstonedevops-${CIRCLE_WORKFLOW_ID:0:7}

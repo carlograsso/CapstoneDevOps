@@ -5,7 +5,7 @@ metadata:
   labels:
     app: FlaskHello
 spec:
-  replicas: 6
+  replicas: 2
   selector:
     matchLabels:
       app: FlaskHello
@@ -13,6 +13,11 @@ spec:
     metadata:
       labels:
         app: FlaskHello
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+
     spec:
       containers:
         - name: capstonedevops
