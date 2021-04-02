@@ -65,7 +65,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: deployment.yaml
-          resource-name: deployment/capstonedevops
+          resource-name: capstonedevops
 
 workflows:
   deployment:
@@ -93,17 +93,4 @@ workflows:
           record: true
           requires:
             - create-deployment
-          resource-name: deployment/capstonedevops
-      - aws-eks/delete-cluster:
-          cluster-name: capstonedevops-cluster
-          requires:
-            - aws-eks/update-container-image
-# workflows:
-#   default:
-#     jobs:
-#       # - lint
-#       # - docker-build-push:
-#       #     requires:
-#       #       - lint
-#       - deploy-cluster:
-#           cluster-name: capstonedevops-${CIRCLE_WORKFLOW_ID:0:7}
+          resource-name: capstonedevops
